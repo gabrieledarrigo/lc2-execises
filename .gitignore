@@ -1,0 +1,11 @@
+# Misc
+
+.DS_Store
+
+# LC-2 Compiled files
+
+*.bin
+*.hex
+*.lst
+*.obj
+*.sym
