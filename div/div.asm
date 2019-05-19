@@ -1,10 +1,19 @@
-; DIV
+;******************************************************************
+;
+; SOTTOPROGRAMMA DI DIVISIONE INTERA DI DUE NUMERI INTERI POSITIVI
+;
+; INPUT R0 = dividendo N (Numeratore)
+; R1 = divisore D (Denominatore)
+;
+; OUTPUT R0 = Q (intero arrotondato per difetto del quoziente Q=N/D)
+;
+;******************************************************************
 
 	.orig x3000
 	LD R0, N
 	LD R1, D
 	JSR div
-	HALT
+	TRAP x25
 
 ; Subroutine
 div	ST R2, saveR2	

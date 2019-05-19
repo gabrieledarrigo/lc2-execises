@@ -1,9 +1,16 @@
-; MAIUSC
-
+;************************************************************
+;
+; PROGRAMMA DI CONVERSIONE DI UNA STRINGA IN LETTERE MAIUSCOLE
+;
+; INPUT R0 = indirizzo inizio stringa
+;
+; OUTPUT R0 = conteggio delle lettere sostituite
+;
+;************************************************************
 	.orig x3000
 	LD R0, ptr
 	JSR upper
-	HALT
+	TRAP x25
 
 ; Salvo il valore dei registri
 upper	ST R1, saveR1
@@ -20,11 +27,11 @@ upper	ST R1, saveR1
 
 ; Inizio il ciclo
 loop	LDR R5, R0, #0
-	BRZ finish	; Se il carattere è zero, esci
+	BRZ finish	; Se il carattere ï¿½ zero, esci
 	ADD R6, R5, R2	; Confronta con lettera minuscola a
-	BRN next	; Se R5 - 97 è negativo non ho trovato una lettera minuscola
+	BRN next	; Se R5 - 97 ï¿½ negativo non ho trovato una lettera minuscola
 	ADD R6, R5, R3	; Confronta con lettera minuscola z
-	BRP next	; Se R5 - 122 è positivo non ho trovato una lettera minuscola
+	BRP next	; Se R5 - 122 ï¿½ positivo non ho trovato una lettera minuscola
 	BRNZP found	; In ogni altro caso ho trovato una minuscola
 
 ; Lettera minuscola trovata
@@ -58,5 +65,5 @@ saveR4	.blkw #1
 saveR5	.blkw #1
 
 ptr	.fill string
-string	.stringz "LA sigla"
+string	.stringz "La sigla USA significa United States of America"
 	.end

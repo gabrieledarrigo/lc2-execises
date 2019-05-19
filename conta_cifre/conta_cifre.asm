@@ -1,4 +1,11 @@
-; CONTACIFRE
+;********************************************************************
+; SOTTOPROGRAMMA DI CONTEGGIO NELL'ARRAY C DELLE CIFRE NELLA STRINGA S
+;
+; INPUT R0 = indirizzo inizio stringa S (0 terminatore)
+; R1 = indirizzo inizio array C (10 elementi)
+;
+; OUTPUT C contiene il conteggi delle cifre da '0' a '9' presenti in S
+;********************************************************************
 
 	.orig x3000
 	LD  R0, ptr1

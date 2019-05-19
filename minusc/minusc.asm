@@ -1,9 +1,16 @@
-; MINUSC PROGRAMMA DI CONVERSIONE DI UNA STRINGA IN LETTERE MAIUSCOLE
-
+;************************************************************
+;
+; PROGRAMMA DI CONVERSIONE DI UNA STRINGA IN LETTERE MINUSCOLE
+;
+; INPUT R0 = indirizzo inizio stringa
+;
+; OUTPUT R0 = conteggio delle lettere sostituite
+;
+;************************************************************
 	.orig x3000
 	LD R0, ptr
 	JSR lower
-	HALT
+	TRAP x25
 
 ; Salvo il valore dei registri
 lower	ST R1, saveR1
@@ -20,11 +27,11 @@ lower	ST R1, saveR1
 
 ; Inizio il ciclo
 loop	LDR R5, R0, #0
-	BRZ finish	; Se il carattere è zero, esci
+	BRZ finish	; Se il carattere ï¿½ zero, esci
 	ADD R6, R5, R2	; Confronta con lettera maiuscola A
-	BRN next	; Se R5 - 90 è negativo non ho trovato una lettera maiuscola
+	BRN next	; Se R5 - 90 ï¿½ negativo non ho trovato una lettera maiuscola
 	ADD R6, R5, R3	; Confronta con lettera minuscola Z
-	BRP next	; Se R5 - 122 è positivo non ho trovato una lettera maiuscola
+	BRP next	; Se R5 - 122 ï¿½ positivo non ho trovato una lettera maiuscola
 	BRNZP found	; In ogni altro caso ho trovato una lettera maiuscola
 
 ; Lettera maiuscola trovata

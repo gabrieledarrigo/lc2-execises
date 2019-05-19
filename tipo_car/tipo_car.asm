@@ -1,10 +1,21 @@
-; TIPO_CAR
-
+;*****************************************************************
+; SOTTOPROGRAMMA DI ANALISI DEL TIPO DI CARATTERE ASCII RICEVUTO
+;
+; INPUT R0 = carattere da analizzare (codice compreso fra 0 e 127)
+;
+; OUTPUT R1 = tipo del carattere:
+; 1 = carattere di controllo (codice minore di 32)
+; 2 = cifra (codice compreso fra 48 e 57)
+; 3 = lettera maiuscola (codice compreso fra 65 e 90)
+; 4 = lettera minuscola (codice compreso fra 97 e 122)
+; 5 = altro simbolo
+;*****************************************************************
 	.orig x3000
 
 	AND R0, R0, #0	; R0 = 0
 	LD R0, char	; Carica il carattere in R0
 	JSR type
+	TRAP x25
 
 ; Salvo il valore dei registri
 type 	ST R2, saveR2

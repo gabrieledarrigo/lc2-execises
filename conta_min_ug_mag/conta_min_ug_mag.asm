@@ -1,4 +1,13 @@
-; CONTA_MIN_UGU_MAG
+;**************************************************************************
+; SOTTOPROGRAMMA DI CONTEGGIO DEL NUMERO DI VALORI MINORI, UGUALI E MAGGIORI
+; DI UN VALORE PASSATO IN INGRESSO
+;
+; INPUT R0 = indirizzo inizio sequenza di numeri (0 terminatore)
+; R1 = valore da confrontare
+; OUTPUT R0 = conteggio dei numeri minori del valore di confronto
+; R1 = conteggio dei numeri minori del valore di confronto
+; R2 = conteggio dei numeri minori del valore di confronto
+;**************************************************************************
 
 	.orig x3000
 
@@ -7,7 +16,8 @@
 	LEA R0, ptr	; Carico in R0 l'indirizzo della prima cella di memoria della sequenza
 	LD R1, num	; Carico in R1 il numero da confrontare
 	JSR COUNT	; Salto alla subroutine
-
+	TRAP x25
+	
 ; Salvo il valore dei registri
 COUNT	
 	ST R3, saveR3
@@ -23,11 +33,11 @@ COUNT
 
 ; Inizio il confronto
 loop	LDR R2, R0, #0	; Carico il primo valore
-	BRZ exit	; Se il valore è 0 esco dal ciclo
+	BRZ exit	; Se il valore ï¿½ 0 esco dal ciclo
 	ADD R2, R2, R1	; R2 = R2 - R1 effettuo il confronto sommando i due valori
-	BRN lower	; Se il risultato è negativo il numero della sequenza è minore
-	BRZ equal	; Se il risultato è 0 i numeri sono uguali
-	BRP greater	; Se il risultato è positivo il numerio della sequenza è maggiore
+	BRN lower	; Se il risultato ï¿½ negativo il numero della sequenza ï¿½ minore
+	BRZ equal	; Se il risultato ï¿½ 0 i numeri sono uguali
+	BRP greater	; Se il risultato ï¿½ positivo il numerio della sequenza ï¿½ maggiore
 
 lower	ADD R3, R3, #1	; Incremento il contatore dei numeri minori trovati
 	BRNZP next

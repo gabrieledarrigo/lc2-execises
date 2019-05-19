@@ -1,9 +1,19 @@
-; SOMMATORIA_ARRAY
+;**************************************************************************
+; SOTTOPROGRAMMA DI CALCOLO DELLA SOMMA PARZIALE DDEGLI ELEMENTI DI UN ARRAY
+;
+; INPUT R0 = indirizzo inizio array A (0 terminatore)
+; R1 = indirizzo zona di memoria per array R DELLE SOMMATORIE
+;
+; OUTPUT R[i] = somma dei primi i elementi di A
+; R[i] = 0 se traboccamento
+;**************************************************************************
+
 	.orig x3000
 	LEA R0, ptr1
 	LEA R1, ptr2
 	JSR sum_arr
-
+	TRAP x25
+	
 ; Salvo il valore dei registri
 sum_arr	ST R2, saveR2
 	ST R3, saveR3
@@ -16,29 +26,29 @@ sum_arr	ST R2, saveR2
 
 ; Inizio il ciclo
 loop	LDR R2, R0, #0	; Carico A[i]
-	BRZ exit	; Se il numero è zero esco
-	BRN neg		; Il primo numero caricato è negativo
-	BRP pos		; Il primo numero caricato è positivo
+	BRZ exit	; Se il numero ï¿½ zero esco
+	BRN neg		; Il primo numero caricato ï¿½ negativo
+	BRP pos		; Il primo numero caricato ï¿½ positivo
 
 neg	LDR R3, R0, #1	; Carico A[i + 1]
-	BRN under	; Il secondo numero è negativo, ci può essere underflow
-	ADD R4, R2, R3	; Il secondo numero è positivo, sommo
+	BRN under	; Il secondo numero ï¿½ negativo, ci puï¿½ essere underflow
+	ADD R4, R2, R3	; Il secondo numero ï¿½ positivo, sommo
 	STR R4, R1, #0	; Salvo la somma in R[i]
 	BRNZP next
 
 pos 	LDR R3, R0, #1	; Carico A[i + 1]
-	BRP over	; Il secondo numero è positivo, ci può essere overflow
-	ADD R4, R2, R3	; Il secondo numero è negativo sommo
+	BRP over	; Il secondo numero ï¿½ positivo, ci puï¿½ essere overflow
+	ADD R4, R2, R3	; Il secondo numero ï¿½ negativo sommo
 	STR R4, R1, #0	; Salvo la somma in R[i]
 	BRNZP next
 
 under	ADD R4, R2, R3	; Sommo i valori
-	BRP zero	; Se c'è underflow sommo 0
+	BRP zero	; Se c'ï¿½ underflow sommo 0
 	STR R4, R1, #0	; Salvo la somma in R[i]
 	BRNZP next
 
 over 	ADD R4, R2, R3	; Sommo i valori
-	BRN zero	; Se c'è overflow salvo 0
+	BRN zero	; Se c'ï¿½ overflow salvo 0
 	STR R4, R1, #0	; Salvo la somma in R[i]
 	BRNZP next
 

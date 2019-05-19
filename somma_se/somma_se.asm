@@ -1,10 +1,23 @@
-; SOMMA_SE
+;*****************************************************************
+;
+; PROGRAMMA DI CONTEGGIO E SOMMA DEI NUMERI UGUALI AL NUMERO N DATO
+;
+; INPUT R0 = indirizzo inizio primo array (0 terminatore)
+; R1 = indirizzo inizio secondo array
+; R2 = numero N
+;
+; OUTPUT R0 = somma dei numeri del secondo array in corrispondenza
+; delle posizioni di N nel primo array
+;
+;*****************************************************************
+
 	.orig x3000;
 	LEA R0, ptr1
 	LEA R1, ptr2
 	LD R2, num
 	JSR sum_se
-
+	TRAP x25
+	
 ; Salvo il valore dei registri
 sum_se	ST R3, saveR3
 
@@ -15,9 +28,9 @@ sum_se	ST R3, saveR3
 
 ; Inizio il ciclo per trovare le posizioni uguali
 loop	LDR R4, R0, #0	; Carico il valore del primo array
-	BRZ finish	; Se il valore è zero esco
+	BRZ finish	; Se il valore ï¿½ zero esco
 	ADD R4, R4, R2	; R4 = R4 - R2
-	BRZ found	; Se il risultato è 0 ho trovato il numero
+	BRZ found	; Se il risultato ï¿½ 0 ho trovato il numero
 	BRNZP next	; Viceversa continuo il ciclo	
 
 ; Ho trovato il numero nel primo array

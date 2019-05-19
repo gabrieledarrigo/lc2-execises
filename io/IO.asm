@@ -1,4 +1,4 @@
-;programma che trasforma una lettera da maiuscola a minuscola
+; Programma che trasforma una lettera da maiuscola a minuscola
 	.orig	x3000
 	TRAP	x23
 	LD	R1,MA2mi
