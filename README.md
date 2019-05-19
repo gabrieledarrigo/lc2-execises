@@ -1,7 +1,7 @@
 # LC-2 Execises
 > 💻 From Bits and Gates to C and Beyond...
 
-A series of execises for the Computing Systems course of "Sicurezza dei Sistemi e delle Reti Informatiche".  
+A series of execises for the Computing Systems course of ["Sicurezza dei Sistemi e delle Reti Informatiche"](http://www.cosp.unimi.it/offerta_didattica/F68.htm) at Università degli Studi di Milano.  
 
 Each .asm program can be compiled with "Litte Computer 2" (LC-2) simulator, an educative  simple computer used to
 introduce general-purpose computing devices to first-year engineering students with no previous background in computer architecture or
